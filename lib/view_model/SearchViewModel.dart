@@ -32,6 +32,7 @@ class SearchViewModel extends ChangeNotifier {
 
   /// 이미지 리스트 초기화
   void resetImageList() {
+    _inputText = '';
     _imageList.clear();
     _page = 1;
     notifyListeners();

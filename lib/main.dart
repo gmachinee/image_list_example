@@ -46,12 +46,21 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateMixin {
-  TabController? tabController;
+  late TabController tabController;
 
   @override
   void initState() {
     super.initState();
     tabController = TabController(length: 2, vsync: this);
+    tabController.addListener(() {
+      if (tabController.indexIsChanging) {
+        if (tabController.index == 0) {
+          // 첫번째 탭으로 전환될 때 검색 초기화
+          final searchViewModel = Provider.of<SearchViewModel>(context, listen: false);
+          searchViewModel.resetImageList();
+        }
+      }
+    });
   }
 
   @override

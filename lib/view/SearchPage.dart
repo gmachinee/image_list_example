@@ -13,14 +13,15 @@ class SearchPage extends StatefulWidget {
 }
 
 class _SearchPageState extends State<SearchPage> {
-  final ScrollController _scrollController = ScrollController();
+  late ScrollController _scrollController;
 
   @override
   void initState() {
     super.initState();
 
     // 무한 스크롤
-    _scrollController!.addListener(() {
+    _scrollController = ScrollController();
+    _scrollController.addListener(() {
       final viewModel = Provider.of<SearchViewModel>(context);
       if (viewModel.isLoading) return;
 
