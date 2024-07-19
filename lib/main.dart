@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:image_list_example/FavoritePage.dart';
-import 'package:image_list_example/SearchPage.dart';
+import 'package:provider/provider.dart';
+
+import 'view/FavoritePage.dart';
+import 'view/SearchPage.dart';
+import 'repository/SearchRepository.dart';
+import 'view_model/SearchViewModel.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,14 +16,21 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'ImageList Example',
-      theme: ThemeData(
-        scaffoldBackgroundColor: Colors.black,
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
-        useMaterial3: true,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => SearchViewModel(SearchRepository()),
+        ),
+      ],
+      child: MaterialApp(
+        title: 'ImageList Example',
+        theme: ThemeData(
+          scaffoldBackgroundColor: Colors.black,
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
+          useMaterial3: true,
+        ),
+        home: MyHomePage(),
       ),
-      home: MyHomePage(),
     );
   }
 }
