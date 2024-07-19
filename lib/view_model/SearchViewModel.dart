@@ -24,6 +24,12 @@ class SearchViewModel extends ChangeNotifier {
     _page++;
   }
 
+  /// 검색 초기화
+  void resetSearch() {
+    _inputText = '';
+    resetImageList();
+  }
+
   /// 검색 시작
   void search() {
     resetImageList();
@@ -32,7 +38,6 @@ class SearchViewModel extends ChangeNotifier {
 
   /// 이미지 리스트 초기화
   void resetImageList() {
-    _inputText = '';
     _imageList.clear();
     _page = 1;
     notifyListeners();

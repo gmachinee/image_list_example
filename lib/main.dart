@@ -57,7 +57,7 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
         if (tabController.index == 0) {
           // 첫번째 탭으로 전환될 때 검색 초기화
           final searchViewModel = Provider.of<SearchViewModel>(context, listen: false);
-          searchViewModel.resetImageList();
+          searchViewModel.resetSearch();
         }
       }
     });
