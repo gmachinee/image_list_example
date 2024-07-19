@@ -33,6 +33,12 @@ class _SearchPageState extends State<SearchPage> {
     });
   }
 
+  @override
+  dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
   /// 이미지 클릭
   onTapImage(ImageModel image) {
     // 상세 페이지로 이동

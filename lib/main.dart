@@ -46,41 +46,40 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateMixin {
+  int _currentIndex = 0;
+
   late TabController tabController;
+  final List<Widget> _children = [SearchPage(), FavoritePage()];
 
   @override
   void initState() {
     super.initState();
     tabController = TabController(length: 2, vsync: this);
-    tabController.addListener(() {
-      if (tabController.indexIsChanging) {
-        if (tabController.index == 0) {
-          // 첫번째 탭으로 전환될 때 검색 초기화
-          final searchViewModel = Provider.of<SearchViewModel>(context, listen: false);
-          searchViewModel.resetSearch();
-        }
-      }
-    });
   }
 
   @override
   void dispose() {
-    tabController!.dispose();
+    tabController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: TabBarView(
-        controller: tabController,
-        children: <Widget>[SearchPage(), FavoritePage()],
+      body: IndexedStack(
+        index: _currentIndex,
+        children: _children,
       ),
       bottomNavigationBar: TabBar(tabs: const <Tab>[
         Tab(icon: Icon(Icons.search, color: Colors.white)),
         Tab(icon: Icon(Icons.favorite_outline, color: Colors.white)),
       ],
         controller: tabController,
+        onTap: (index) {
+          setState(() {
+            _currentIndex = index;
+          });
+        },
         indicatorColor: Colors.white,
         indicatorWeight: 3,
       ),
