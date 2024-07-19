@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'view/FavoritePage.dart';
-import 'view/SearchPage.dart';
 import 'repository/SearchRepository.dart';
+import 'repository/FavoriteRepository.dart';
+import 'view/SearchPage.dart';
+import 'view/FavoritePage.dart';
 import 'view_model/SearchViewModel.dart';
+import 'view_model/FavoriteViewModel.dart';
 
 void main() {
   runApp(const MyApp());
@@ -20,6 +22,9 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(
           create: (context) => SearchViewModel(SearchRepository()),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => FavoriteViewModel(FavoriteRepository()),
         ),
       ],
       child: MaterialApp(

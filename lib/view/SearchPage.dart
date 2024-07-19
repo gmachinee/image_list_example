@@ -3,9 +3,10 @@ import 'package:provider/provider.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import '../view_model/SearchViewModel.dart';
 import '../model/ImageModel.dart';
+import 'DetailPage.dart';
 import 'ImageCell.dart';
 
-/// SearchPage는 검색 페이지의 뷰를 담당합니다.
+/// SearchPage는 검색 페이지의 뷰를 담당합니다
 class SearchPage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => _SearchPageState();
@@ -32,7 +33,9 @@ class _SearchPageState extends State<SearchPage> {
   }
 
   /// 이미지 클릭
-  void onTapImage(BuildContext context, ImageModel image) {
+  onTapImage(ImageModel image) {
+    // 상세 페이지로 이동
+    Navigator.of(context).push(MaterialPageRoute(builder: (context) => DetailPage(image: image)));
   }
 
   @override
@@ -56,7 +59,7 @@ class _SearchPageState extends State<SearchPage> {
             itemBuilder: (BuildContext context, int index) {
               final image = viewModel.imageList[index];
               return ImageCell(
-                onTap: () => onTapImage(context, image),
+                onTap: () => onTapImage(image),
                 image: image,
               );
             },

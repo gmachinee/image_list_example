@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import '../model/ImageModel.dart';
+import '../view_model/FavoriteViewModel.dart';
 
 typedef OnFavoriteListener = void Function(bool isFavorite);
 
@@ -13,12 +15,15 @@ class ImageCell extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final viewModel = Provider.of<FavoriteViewModel>(context);
+
     // 즐겨찾기 버튼 생성
     buildFavoriteButton() {
       return GestureDetector(
           onTap: () {
+            viewModel.toggleFavoriteStatus(image);
           },
-          child: false ?
+          child: viewModel.isFavoriteImage(image) ?
           const Icon(Icons.favorite, color: Colors.pink, size: 30,) :
           const Icon(Icons.favorite_outline, color: Colors.white, size: 30,)
       );
