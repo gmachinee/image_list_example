@@ -1,6 +1,6 @@
 # image_list_example
 
-A new Flutter project.
+https://velog.io/@gmachinee/Flutter-이미지-리스트-예제-feat.-MVVM-Provider
 
 ## Getting Started
 
